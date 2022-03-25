@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const Product = require("../../models/Product");
+const auth = require("../../middlewares/auth");
+const isadmin = require("../../middlewares/isadmin");
 // const { validateProduct } = require("../../models/Product");
 router.get("/", async function (req, res) {
   try {
@@ -32,19 +34,19 @@ router.get("/:id", async function (req, res) {
     return res.status(400).send("The format of id is not correct");
   }
 });
-router.post("/", async function (req, res) {
+router.post("/", auth, isadmin, async function (req, res) {
   try {
     let result = new Product();
     result.name = req.body.name;
     result.price = req.body.price;
     result = await result.save();
-    res.send(result);
+    return res.send(result);
   } catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
   }
 });
-router.put("/:id", async function (req, res) {
+router.put("/:id", auth, isadmin, async function (req, res) {
   try {
     let result = await Product.findById(req.params.id);
     if (!result) {
@@ -67,7 +69,7 @@ router.put("/:id", async function (req, res) {
     return res.status(400).send(err.message);
   }
 });
-router.delete("/:id", async function (req, res) {
+router.delete("/:id", auth, isadmin, async function (req, res) {
   try {
     let result = await Product.findById(req.params.id);
     if (!result) {
