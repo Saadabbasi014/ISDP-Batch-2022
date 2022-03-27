@@ -87,7 +87,25 @@ function getRequestData(response) {
     console.log(response);
     for (var i = 0; i < response.length; i++) {
         $("#receipediv").append(
-            `<div class = "receipe"><h3>${response[i].title}<button class="btn btn-success updatebutton float-right" data-id=${response[i]._id}>Update</button><button class="btn btn-danger deletebutton float-right" data-id=${response[i]._id}>Delete</button></h3><p>${response[i].body}</p></div>`
+            //`<div class = "receipe"><h3>${response[i].title}<button class="btn btn-success updatebutton float-right" data-id=${response[i]._id}>Update</button><button class="btn btn-danger deletebutton float-right" data-id=${response[i]._id}>Delete</button></h3><p>${response[i].body}</p></div>`
+            `<div class = "receipe col-lg-4 col-md-6 col-11 pt-5">
+            <div class="card-group">
+            <div class="card bg-light" style="width: 18rem;">
+            <div class="card-header bg-dark">
+           <h5 class="text-center text-light"> Italian Fast Foods<h5/>
+          </div>
+  <div class="card-body">
+    <h5 class="card-title text-center text-success">${response[i].title}</h5>
+    <p class="card-text text-center text-danger">>${response[i].body}</p>
+    <button class="btn btn-success updatebutton " data-id=${response[i]._id}> Update</button>
+    <button class="btn btn-danger deletebutton mx-auto" data-id=${response[i]._id}> Delete</button>
+
+    </div>
+    <div class=" card-footer bg-secondary ">
+    <small class=" text-light">Last updated 3 mins ago</small>
+  </div>
+  </div>
+</div>`
             // "<div class = receipe><h3>" +float-right
             //   response[i].title +
             //   "</h3><p>" +
